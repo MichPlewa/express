@@ -27,6 +27,10 @@ app.get('/about', (req, res) => {
   res.show('about.html');
 });
 
+app.get('/hallo/:name', (req, res) => {
+  res.send(`Hallo ${req.params.name}`);
+});
+
 app.use((req, res) => {
   res.status(404).show('404.html');
 });
