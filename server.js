@@ -1,9 +1,14 @@
 const express = require('express');
 const path = require('path');
+const hbs = require('express-handlebars');
 
 const app = express();
+app.engine('hbs', hbs());
+app.set('view engine', 'hbs');
 
 const isAdmin = false;
+
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use((req, res, next) => {
   res.show = (name) => {
@@ -17,8 +22,6 @@ app.use('/user', (req, res, next) => {
   else res.send('You have to log in');
 });
 
-app.use(express.static(path.join(__dirname, '/public')));
-
 app.get('/', (req, res) => {
   res.show('index.html');
 });
@@ -28,7 +31,7 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/hallo/:name', (req, res) => {
-  res.send(`Hallo ${req.params.name}`);
+  res.render('hallo', { layout: false, name: req.params.name });
 });
 
 app.use((req, res) => {
