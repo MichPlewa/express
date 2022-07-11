@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use((req, res, next) => {
   res.show = (name) => {
-    res.sendFile(path.join(__dirname, `/view/${name}`));
+    res.sendFile(path.join(__dirname, `/views/${name}`));
   };
   next();
 });
