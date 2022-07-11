@@ -30,6 +30,14 @@ app.get('/about', (req, res) => {
   res.render('about', { layout: false });
 });
 
+app.get('/user/panel', (req, res) => {
+  res.render('panel', { layout: false });
+});
+
+app.get('/user/setting', (req, res) => {
+  res.render('setting', { layout: false });
+});
+
 app.get('/hallo/:name', (req, res) => {
   res.render('hallo', { layout: false, name: req.params.name });
 });
