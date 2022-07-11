@@ -6,44 +6,34 @@ const app = express();
 app.engine('hbs', hbs());
 app.set('view engine', 'hbs');
 
-const isAdmin = false;
-
 app.use(express.static(path.join(__dirname, '/public')));
 
-// app.use((req, res, next) => {
-//   res.render = (name) => {
-//     res.sendFile(path.join(__dirname, `/views/${name}`));
-//   };
-//   next();
-// });
-
-app.use('/user', (req, res, next) => {
-  if (isAdmin) next();
-  else res.send('You have to log in');
+app.get('/', (req, res) => {
+  res.render('index');
 });
 
-app.get('/', (req, res) => {
-  res.render('index', { layout: false });
+app.get('/hello/:name', (req, res) => {
+  res.render('hello', { name: req.params.name });
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { layout: false });
+  res.render('about');
 });
 
-app.get('/user/panel', (req, res) => {
-  res.render('panel', { layout: false });
+app.get('/contact', (req, res) => {
+  res.render('contact');
 });
 
-app.get('/user/setting', (req, res) => {
-  res.render('setting', { layout: false });
+app.get('/info', (req, res) => {
+  res.render('info');
 });
 
-app.get('/hallo/:name', (req, res) => {
-  res.render('hallo', { layout: false, name: req.params.name });
+app.get('/history', (req, res) => {
+  res.render('history');
 });
 
 app.use((req, res) => {
-  res.status(404).render('404');
+  res.status(404).send('404 not found...');
 });
 
 app.listen(8000, () => {
