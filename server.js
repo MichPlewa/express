@@ -28,10 +28,10 @@ app.get('/contact', (req, res) => {
 });
 
 app.post('/contact/send-message', (req, res) => {
-  const { author, sender, title, message } = req.body;
-
-  if (author && sender && title && message) {
-    res.render('contact', { isSent: true });
+  const { author, sender, title, message, design } = req.body;
+  console.log(design);
+  if (author && sender && title && message && design) {
+    res.render('contact', { isSent: true, design });
   } else {
     res.render('contact', { isError: true });
   }
